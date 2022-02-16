@@ -185,7 +185,7 @@ if __name__ == '__main__':
     parser.add_argument('--random_seed', type = int, default="42")
     parser.add_argument('--gpt_model_type',type=str, default= "gpt")
     parser.add_argument('--lr', type = float, default=1e-4)
-    parser.add_argument('--log_file',type = str, default="log/visualGPT.txt")
+    parser.add_argument('--log_file',type = str, default="logs/vgpt.log")
     parser.add_argument('--gradient_accumulation_steps', type=int, default=1,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
 
@@ -226,7 +226,10 @@ if __name__ == '__main__':
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
 
-    device = torch.device('cuda')
+    if torch.cuda.is_available():
+        device = torch.device('cuda')
+    else:
+        device = torch.device('cpu')
 
     writer = SummaryWriter(log_dir=os.path.join(args.logs_folder, args.exp_name))
 

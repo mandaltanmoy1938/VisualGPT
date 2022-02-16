@@ -1,0 +1,7 @@
+annotations/
+venv3/
+*logs/
+*.bin
+classes_*
+packages_*
+.idea/
